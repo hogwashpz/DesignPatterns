@@ -1,41 +1,44 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Strategy
 {
+    enum Actors
+    {
+        King,
+        Queen,
+        Troll
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            CookingMethod cookMethod = new CookingMethod();
-
-            Console.WriteLine("What food would you like to cook?");
-            var food = Console.ReadLine();
-            cookMethod.SetFood(food);
-
-            Console.WriteLine("What cooking strategy would you like to use (1-3)?");
-            int input = int.Parse(Console.ReadKey().KeyChar.ToString());
-
-            switch (input)
+            var characters = new Dictionary<Actors, Character>()
             {
-                case 1:
-                    cookMethod.SetCookStrategy(new Grilling());
-                    cookMethod.Cook();
-                    break;
+                { Actors.King, new King(new SwordBehavior()) },
+                { Actors.Queen, new Queen(new BowAndArrowBehavior()) },
+                { Actors.Troll, new Troll() }
+            };
 
-                case 2:
-                    cookMethod.SetCookStrategy(new OvenBaking());
-                    cookMethod.Cook();
-                    break;
+            characters[Actors.King].Display();
+            characters[Actors.King].Fight();
+            Console.WriteLine("Switch weapon (strategy in runtime).");
+            characters[Actors.King].SetStrategy(new AxeBehavior());
+            characters[Actors.King].Fight();
+            Console.WriteLine();
 
-                case 3:
-                    cookMethod.SetCookStrategy(new DeepFrying());
-                    cookMethod.Cook();
-                    break;
+            characters[Actors.Queen].Display();
+            characters[Actors.Queen].Fight();
+            Console.WriteLine();
 
-                default:
-                    Console.WriteLine("Invalid Selection!");
-                    break;
-            }
+            characters[Actors.Troll].Display();
+            characters[Actors.Troll].Fight();
+            Console.WriteLine("Picking weapon (strategy in runtime).");
+            characters[Actors.Troll].SetStrategy(new ClubBehavior());
+            characters[Actors.Troll].Fight();
+            Console.WriteLine();
+
             Console.ReadKey();
         }
     }
