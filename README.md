@@ -1,7 +1,7 @@
 # DesignPatterns
 Repository of useful Design Patterns.
 
-Examples are taken or custom implemented from following:
+Examples are taken or custom example is made from following sources:
 
 - [Head First Design Patterns (1st ed. 2008)](https://www.oreilly.com/library/view/head-first-design/0596007124/)
   
@@ -15,7 +15,8 @@ Examples are taken or custom implemented from following:
 
    
 #### **Behavioral Patterns**
-
+* Strategy
+* Observer
 
   
 
